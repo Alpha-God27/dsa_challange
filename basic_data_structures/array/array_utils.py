@@ -8,6 +8,8 @@ Description : This module contains implementations of basic array operations
               - Insertion (beginning, middle, end)
               - Deletion (by index, by value)
               - Traversal
+              - Rotation 
+              - Reversal (Inplace by using in place reversal)
               - Searching (linear and binary)
               - Updating values
               - Utility functions for demonstration
@@ -46,6 +48,21 @@ class Array:
             self.arr.remove(value)
         else:
             print("Value not found in array.")
+
+    def rotate(self, k):
+        if k < 0:
+            print("Rotation count must be non-negative.")
+        else:
+            k = k % len(self.arr)
+            self.arr = self.arr[k:] + self.arr[:k]
+
+    def reverse_inplace(self):
+        start = 0
+        end = len(self.arr) - 1
+        while start < end:
+            self.arr[start], self.arr[end] = self.arr[end], self.arr[start]
+            start += 1
+            end -= 1
 
     def traverse(self):
         for item in self.arr:
@@ -111,6 +128,14 @@ if __name__ == "__main__":
 
     a.delete_by_value(99)
     print("After delete_by_value(99):")
+    a.traverse()
+
+    a.rotate(2)
+    print("After rotate(2):")
+    a.traverse()
+
+    a.reverse_inplace()
+    print("After reverse_inplace():")
     a.traverse()
 
     index = a.linear_search(4)
